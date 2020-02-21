@@ -1,6 +1,6 @@
 {
   "name": "provspec-api",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "author": "",
   "license": "MIT",
@@ -17,7 +17,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "release": "standard-version",
+    "patch": "npm run release -- --release-as patch",
+    "minor": "npm run release -- --release-as minor",
+    "major": "npm run release -- --release-as major"
   },
   "dependencies": {
     "@nestjs/common": "6.11.8",
@@ -53,6 +57,7 @@
     "eslint-plugin-import": "2.20.1",
     "jest": "24.9.0",
     "prettier": "1.19.1",
+    "standard-version": "^7.1.0",
     "supertest": "4.0.2",
     "ts-jest": "25.1.0",
     "ts-loader": "6.2.1",
