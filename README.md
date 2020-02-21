@@ -13,6 +13,10 @@
 
 [Prospec](https://github.com/juandav/prospec-api) is a backend challenge repository.
 
+## Documentation
+
+please go to <a href="http://localhost:3000/api">http://localhost:3000/api</a> and try.
+
 ## Installation
 
 ```bash
