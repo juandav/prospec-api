@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import * as is from 'is_js';
 
 export const ProvidersSchema = new mongoose.Schema({
   email: {
@@ -16,12 +17,14 @@ export const ProvidersSchema = new mongoose.Schema({
     required: false,
   },
   specialty: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Specialty'
+    type: Object,
+    ref: 'Specialties',
+    required: true
   },
   projectedStartDate: {
     type: Date,
-    default: new Date()
+    default: new Date(),
+    required: true
   },
   providerType: {
     type: String,
@@ -42,7 +45,8 @@ export const ProvidersSchema = new mongoose.Schema({
       'MD',
       'NP',
       'PA'
-    ]
+    ],
+    required: true
   },
   staffStatus: {
     type: String,
@@ -61,7 +65,8 @@ export const ProvidersSchema = new mongoose.Schema({
       'PROVISIONAL',
       'RESIDENT',
       'TEACHING'
-    ]
+    ],
+    required: true
   },
   status: {
     type: String,
@@ -73,6 +78,7 @@ export const ProvidersSchema = new mongoose.Schema({
       'APPROVED',
       'DENIED'
     ],
+    required: true,
     default: 'AWAITING_CREDENTIALS'
   },
   employerId: {
@@ -81,7 +87,7 @@ export const ProvidersSchema = new mongoose.Schema({
   },
   assignedTo: {
     type: Number,
-    required: true
+    required: () => is.existy(this.employerId)
   },
   createdBy: {
     type: Number,
@@ -90,6 +96,14 @@ export const ProvidersSchema = new mongoose.Schema({
   updatedBy: {
     type: Number,
     required: true
+  },
+  profilePhoto: {
+    type: Object
+  },
+  state: {
+    type: String,
+    enum: ['DONE', 'PENDING'],
+    default: () => (this.projectedStartDate > new Date())? 'PENDING': 'DONE'
   }
 }, { 
   collection: 'providers',

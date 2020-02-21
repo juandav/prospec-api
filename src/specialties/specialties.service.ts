@@ -1,15 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Data } from './interfaces/data.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { MongooseCrudService } from 'nestjs-crud-mongoose';
+import { SpecialtiesEntityDto } from './dto/specialties-entity.dto'
 
 @Injectable()
-export class SpecialtiesService {
-  private readonly data: Data[] = [];
-
-  create(data: Data) {
-    this.data.push(data);
-  }
-
-  findAll(): Data[] {
-    return this.data;
+export class SpecialtiesService extends MongooseCrudService<SpecialtiesEntityDto> {
+  constructor(@InjectModel('Specialties') private readonly specialtiesModel: Model<SpecialtiesEntityDto>) {
+    super(specialtiesModel)
   }
 }

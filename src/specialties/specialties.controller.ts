@@ -1,10 +1,14 @@
+import { Controller } from '@nestjs/common';
+import { Crud } from '@nestjsx/crud';
+import { SpecialtiesEntityDto } from './dto/specialties-entity.dto';
+import { SpecialtiesService } from './specialties.service';
 
-import { Controller, Get } from '@nestjs/common';
-
+@Crud({
+  model: {
+    type: SpecialtiesEntityDto
+  }
+})
 @Controller('specialties')
 export class SpecialtiesController {
-  @Get()
-  findAll(): string {
-    return 'This action returns all specialties';
-  }
+  constructor(public service: SpecialtiesService) { }
 }

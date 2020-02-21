@@ -1,14 +1,16 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from "mongoose";
+import { MongooseCrudService } from 'nestjs-crud-mongoose';
+import { ProviderEntityDto } from './dto/provider-entity.dto';
 
 @Injectable()
-export class ProvidersService {
-  private readonly data: any[] = [];
-
-  create(data: any) {
-    this.data.push(data);
+export class ProvidersService extends MongooseCrudService<ProviderEntityDto> {
+  constructor(@InjectModel('Providers') private readonly providersModel: Model<ProviderEntityDto>) {
+    super(providersModel);
   }
 
-  findAll(): any[] {
-    return this.data;
+  updateProfile(id, file) {
+    this.providersModel.findOneAndUpdate({'_id': id}, { $set:{profilePhoto:file}}).exec();
   }
 }
