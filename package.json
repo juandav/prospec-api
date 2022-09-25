@@ -35,7 +35,7 @@
     "class-validator": "0.11.0",
     "git": "0.1.5",
     "is_js": "0.9.0",
-    "mongoose": "5.9.2",
+    "mongoose": "5.13.15",
     "nestjs-crud-mongoose": "1.1.1",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
